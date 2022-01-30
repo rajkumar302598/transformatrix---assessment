@@ -1,0 +1,41 @@
+<div class="container">
+    <h2 class="center">The Assessment Task</h2>
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="card-body row no-gutters align-items-center">
+                <div class="col-auto">
+                    <i class="fas fa-search h4 text-body"></i>
+                </div>
+                <div class="col">
+                    <input class="form-control form-control-lg form-control-borderless" type="search"
+                        placeholder="Search book..." #searchVal>
+                </div>
+                <div class="col-auto" style="display: flex;">
+                    <button class="btn btn-lg btn-success" type="submit"
+                        (click)="showBooks(searchVal.value)">Search</button>
+                    <button class="btn btn-lg btn-danger" type="submit" (click)="clear()">Clear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <ul class="cards" *ngIf="bookList.length > 0;else noData">
+            <li class="cards_item" *ngFor="let item of responseData">
+                <div class="card">
+                    <div class="card_image"><img
+                            [src]="'https://covers.openlibrary.org/b/isbn/'+ item?.isbn + '-M.jpg'">
+                    </div>
+                    <div class="card_content">
+                        <h2 class="card_title"> {{ item.title }} </h2>
+                        <p class="card_text">{{ item.author_name }}</p>
+                        <button class="btn card_btn" (click)="readBook(item.cover_edition_key)">Read Book</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<ng-template #noData>
+    <p class="emptyData">Search & Get The Datas </p>
+</ng-template>
